@@ -20,10 +20,14 @@ function removeLastCharacter() {
   showExpression();
 }
 
-// funtion to reset the entire expression
+// funtion to reset the entire expression and previous results
 function resetExpression() {
   expression = "";
   showExpression();
+
+  // clear previous results
+  const resultsContainer = document.querySelector(".previous-results");
+  resultsContainer.innerHTML = "";
 }
 
 // function to calculate the result from the current expression
@@ -38,6 +42,9 @@ function calculateResult() {
 
     const result = Function(`"use strict"; return (${parsedExpression})`)();
     expression = result.toString();
+    // show previous result
+    addToPreviousResults(result);
+
     showExpression();
   } catch (error) {
     expression = "Error";
@@ -72,6 +79,15 @@ buttons.forEach((button) => {
 });
 
 showExpression();
+
+// function to show previous results
+function addToPreviousResults(result) {
+  const resultsContainer = document.querySelector(".previous-results");
+  const resultItem = document.createElement("div");
+  resultItem.textContent = formatDisplay(result.toString());
+  resultItem.classList.add("previous-result-item");
+  resultsContainer.prepend(resultItem); // adds to the top
+}
 
 // function to add commas to display
 function formatDisplay(expr) {
