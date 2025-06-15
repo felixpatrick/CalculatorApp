@@ -27,10 +27,12 @@ body {
   text-align: right;
   display: flex;
   justify-content: center;
+  gap: 10px;
+  align-items: center;
 }
 
 .display-screen {
-  width: 80%;
+  width: 70%;
   height: 50px;
   padding: 10px;
   font-size: 1.5rem;
